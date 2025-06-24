@@ -1,330 +1,99 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menù Elegante</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Inter and Playfair Display -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f8f8; /* Light background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ensures body takes full viewport height */
-            padding: 1rem; /* Overall padding for body */
-            box-sizing: border-box;
-            overflow: hidden; /* Prevent body scroll */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menù Elegante</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .menu-wrapper {
-            /* This wrapper simulates the "half A4 paper" and handles the shadow/border */
-            width: 90vw; /* Take 90% of viewport width */
-            height: 90vh; /* Take 90% of viewport height */
-            
-            /* Max limits for desktop to prevent it from getting too huge */
-            max-width: 794px; /* Max width similar to A4 portrait */
-            max-height: 562px; /* Max height similar to half A4 height */
+    body {
+      font-family: 'Georgia', serif;
+      background: #f5f5f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
 
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Shadow for the whole card */
-            border-radius: 1.5rem; /* Rounded corners for the wrapper */
-            position: relative;
-            perspective: 1000px; /* Crucial for 3D effect */
-            background-color: transparent; /* Wrapper itself is transparent */
-            overflow: hidden; /* Important for clean borders (hides content outside bounds) */
-            display: flex; /* Make it a flex container for its content */
-            flex-direction: column; /* Stack children vertically */
-            flex-grow: 1; /* Allow it to grow in flex parent */
-        }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 2rem;
+      text-align: center;
+    }
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 800px) {
-            body {
-                padding: 10px; /* Less padding on very small screens */
-            }
-            .menu-wrapper {
-                border-radius: 1rem;
-                /* On smaller screens, allow it to take more space but still fit */
-                width: 95vw; /* Wider on small screens */
-                height: 95vh; /* Taller on small screens */
-                min-height: 400px; /* Ensure a minimum size on very small devices */
-            }
-            .cover-text {
-                font-size: 8vw; /* Scales with viewport width, adjusted for safe fit */
-                letter-spacing: 0.02em; /* Reduced letter spacing on mobile for better fit */
-            }
-            .menu-title-main {
-                font-size: 6vw; /* Scales with viewport width */
-            }
-            .menu-item-title {
-                font-size: 4vw; /* Scales with viewport width */
-            }
-            .menu-item-description {
-                font-size: 3vw; /* Scales with viewport width */
-                line-height: 1.4;
-            }
-            .page-content {
-                padding: 3vw; /* Padding scales with viewport */
-            }
-            .button-style {
-                padding: 1.5vw 4vw; /* Buttons scale with viewport */
-                font-size: 2vw;
-            }
-            .menu-item-container {
-                 margin-bottom: 2vw; /* Margins scale with viewport */
-            }
-            .divider {
-                width: 8vw;
-                margin: 1vw auto; /* Margins scale with viewport */
-            }
-        }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #2f2f2f;
+      font-weight: 400;
+    }
 
-        /* The actual flipper element */
-        .menu-card-flipper {
-            width: 100%;
-            height: 100%; /* Important: Flipper takes 100% height of its parent (menu-wrapper) */
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s ease-in-out;
-            flex-grow: 1; /* Allow flipper to grow and fill wrapper */
-        }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-        .menu-card-flipper.flipped {
-            transform: rotateY(180deg); /* Flip horizontally */
-        }
+    button:hover {
+      background-color: #45a049;
+    }
 
-        .page-content {
-            position: absolute;
-            width: 100%;
-            height: 100%; /* Occupy 100% of the flipper's height */
-            -webkit-backface-visibility: hidden; /* Hide back of the element when flipped */
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* ALIGN TO CENTER VERTICALLY */
-            align-items: center;
-            padding: 3rem; /* Consistent padding for both sides (will be overridden by media query) */
-            box-sizing: border-box;
-            border-radius: 1.5rem;
-            background-color: white; /* Each page has its own white background */
-            overflow-y: auto; /* Allow scrolling if content overflows vertically */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        }
+    .menu {
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
 
-        .front-page {
-            /* Desktop font size for cover-text before media query overrides */
-            font-family: 'Playfair Display', serif; /* Ensure font is applied here too */
-            font-size: 8rem; /* Fixed size for desktop */
-            font-weight: 700;
-            color: #2a2a2a;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            text-align: center;
-            padding: 1rem;
-            line-height: 1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
-            
-            /* Specific styling for elegant border around Menù text */
-            position: relative; /* Needed for pseudo-elements */
-        }
-        
-        .front-page .cover-text-wrapper {
-            position: relative;
-            padding: 1.5rem 2rem; /* Padding for the wrapper around the text */
-            margin-bottom: 2rem; /* Space between text and button */
-            border: 2px solid #ddd; /* Light border */
-            border-radius: 0.75rem; /* Rounded corners for the border */
-            overflow: visible; /* Allow pseudo-elements to draw outside */
-        }
-
-        .front-page .cover-text-wrapper::before,
-        .front-page .cover-text-wrapper::after {
-            content: '';
-            position: absolute;
-            width: 30px; /* Length of the decorative line */
-            height: 2px;
-            background-color: #aaa; /* Color of the line */
-        }
-
-        .front-page .cover-text-wrapper::before {
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%); /* Move to corner */
-        }
-        .front-page .cover-text-wrapper::after {
-            bottom: 0;
-            right: 0;
-            transform: translate(50%, 50%); /* Move to corner */
-        }
-        
-        /* Adjustments for smaller screens on cover-text-wrapper */
-        @media (max-width: 800px) {
-            .front-page .cover-text-wrapper {
-                padding: 1rem 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-            .front-page .cover-text-wrapper::before,
-            .front-page .cover-text-wrapper::after {
-                width: 20px;
-            }
-        }
-
-
-        .cover-gradient-overlay {
-            position: absolute;
-            inset: 0;
-            /* Enhanced radial gradient */
-            background: radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 50%, rgba(220,220,220,0.7) 100%);
-            border-radius: 1.5rem;
-            z-index: -1;
-        }
-
-        .menu-title-main {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem; /* Fixed size for desktop */
-            font-weight: 700;
-            color: #3a3a3a;
-            margin-bottom: 2rem;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.03);
-        }
-
-        .menu-item-container {
-            width: 100%;
-            max-width: 450px; /* Max width for content container */
-            margin-bottom: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .menu-item-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; /* Fixed size for desktop */
-            font-weight: 700;
-            color: #444;
-            margin-bottom: 0.3rem;
-            text-align: center;
-        }
-
-        .menu-item-description {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem; /* Fixed size for desktop */
-            color: #555;
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        /* Divider style */
-        .divider {
-            width: 80px;
-            height: 2px;
-            background-color: #d4d4d4;
-            margin: 1rem auto;
-            border-radius: 1px;
-        }
-
-        .button-style {
-            padding: 0.9rem 2.5rem;
-            background-color: #4a4a4a; /* Darker button */
-            color: white;
-            font-weight: 600;
-            border-radius: 9999px; /* Fully rounded */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-            border: none;
-            outline: none;
-        }
-        .button-style:hover {
-            background-color: #3a3a4a;
-            transform: translateY(-2px); /* Slight lift effect */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        }
-    </style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
-<body class="antialiased">
-    <!-- Main container for the menu card, handles perspective and overall size -->
-    <div class="menu-wrapper">
-        <!-- Flipper element, handles the 3D rotation -->
-        <div id="menuCardFlipper" class="menu-card-flipper">
-            <!-- Front Page (Cover) -->
-            <div id="frontPage" class="page-content front-page">
-                <div class="cover-gradient-overlay"></div>
-                <div class="cover-text-wrapper">
-                    <h1 class="cover-text">Menù</h1>
-                </div>
-                <button id="flipToMenuBtn" class="button-style mt-10">
-                    Scopri il Menù
-                </button>
-            </div>
+<body>
+  <div class="container" id="home">
+    <h1>Menù</h1>
+    <button onclick="showMenu()">Visualizza Menù</button>
+  </div>
 
-            <!-- Back Page (Menu Content) -->
-            <div id="backPage" class="page-content back-page">
-                <h2 class="menu-title-main">La Nostra Proposta</h2>
+  <div class="container hidden" id="menuPage">
+    <h1>Menù</h1>
+    <div class="menu">
+      <strong>Antipasto:</strong><br>
+      Coni di sfoglia ripieni di mousse di mortadella, ricotta e pistacchio.<br><br>
 
-                <!-- Antipasto -->
-                <div class="menu-item-container">
-                    <h3 class="menu-item-title">Antipasto</h3>
-                    <p class="menu-item-description">Coni di sfoglia ripieni di mousse di mortadella, ricotta e pistacchio.</p>
-                </div>
-                <div class="divider"></div>
+      <strong>Prima portata:</strong><br>
+      Gnocchi gluten free al pomodoro con ricotta, basilico e olio EVO.<br><br>
 
-                <!-- Prima Portata -->
-                <div class="menu-item-container">
-                    <h3 class="menu-item-title">Prima Portata</h3>
-                    <p class="menu-item-description">Gnocchi gluten-free al pomodoro con ricotta, basilico e olio EVO.</p>
-                </div>
-                <div class="divider"></div>
+      <strong>Seconda portata:</strong><br>
+      Filetto di manzo al coltello con uovo pastorizzato, olio EVO e crumble di cipolla fritta.<br><br>
 
-                <!-- Seconda Portata -->
-                <div class="menu-item-container">
-                    <h3 class="menu-item-title">Seconda Portata</h3>
-                    <p class="menu-item-description">Filetto di manzo al coltello con uovo pastorizzato, olio EVO e crumble di cipolla fritta.</p>
-                </div>
-                <div class="divider"></div>
-
-                <!-- Pre-Dessert -->
-                <div class="menu-item-container">
-                    <h3 class="menu-item-title">Pre-Dessert</h3>
-                    <p class="menu-item-description">Sorbetto al mango e yogurt bianco con coulis di lampone e lime.</p>
-                </div>
-
-                <button id="flipToCoverBtn" class="button-style mt-8">
-                    Torna alla Copertina
-                </button>
-            </div>
-        </div>
+      <strong>Pre-Dessert:</strong><br>
+      Sorbetto al mango e yogurt bianco con coulis di lampone e lime.
     </div>
+  </div>
 
-    <script>
-        const menuCardFlipper = document.getElementById('menuCardFlipper');
-        const flipToMenuBtn = document.getElementById('flipToMenuBtn');
-        const flipToCoverBtn = document.getElementById('flipToCoverBtn');
-
-        // Function to flip the menu card
-        function flipCard() {
-            menuCardFlipper.classList.toggle('flipped');
-        }
-
-        // Event listeners for flipping
-        flipToMenuBtn.addEventListener('click', flipCard);
-        flipToCoverBtn.addEventListener('click', flipCard);
-
-        // Keyboard navigation for accessibility
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'Enter') {
-                if (!menuCardFlipper.classList.contains('flipped')) {
-                    flipCard();
-                }
-            } else if (event.key === 'ArrowLeft') {
-                if (menuCardFlipper.classList.contains('flipped')) {
-                    flipCard();
-                }
-            }
-        });
-    </script>
+  <script>
+    function showMenu() {
+      document.getElementById('home').classList.add('hidden');
+      document.getElementById('menuPage').classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
