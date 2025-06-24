@@ -18,24 +18,24 @@
             min-height: 100vh; /* Ensures body takes full viewport height */
             padding: 1rem; /* Overall padding for body */
             box-sizing: border-box;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-            align-items: flex-start; /* Align content to start when scrolling needed */
-            padding-top: 20px; /* Add some top padding */
-            padding-bottom: 20px; /* Add some bottom padding */
+            overflow: hidden; /* Prevent body scroll */
         }
 
         .menu-wrapper {
             /* This wrapper simulates the "half A4 paper" and handles the shadow/border */
-            max-width: 800px; /* Max width similar to A4 portrait */
-            width: 100%; /* Take full width on smaller screens */
+            width: 90vw; /* Take 90% of viewport width */
+            height: 90vh; /* Take 90% of viewport height */
+            
+            /* Max limits for desktop to prevent it from getting too huge */
+            max-width: 794px; /* Max width similar to A4 portrait */
+            max-height: 562px; /* Max height similar to half A4 height */
+
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Shadow for the whole card */
             border-radius: 1.5rem; /* Rounded corners for the wrapper */
             position: relative;
             perspective: 1000px; /* Crucial for 3D effect */
-            min-height: 500px; /* A reasonable minimum height for desktop */
-            height: 100%; /* Occupy full height of available space in body's flex container */
             background-color: transparent; /* Wrapper itself is transparent */
-            overflow: hidden; /* Important for clean borders */
+            overflow: hidden; /* Important for clean borders (hides content outside bounds) */
             display: flex; /* Make it a flex container for its content */
             flex-direction: column; /* Stack children vertically */
             flex-grow: 1; /* Allow it to grow in flex parent */
@@ -45,40 +45,41 @@
         @media (max-width: 800px) {
             body {
                 padding: 10px; /* Less padding on very small screens */
-                align-items: center; /* Center horizontally if content doesn't fill height */
             }
             .menu-wrapper {
                 border-radius: 1rem;
-                min-height: 65vh; /* Larger min-height on small devices to fill screen */
-                height: 100%; /* Ensure it tries to take available height */
+                /* On smaller screens, allow it to take more space but still fit */
+                width: 95vw; /* Wider on small screens */
+                height: 95vh; /* Taller on small screens */
+                min-height: 400px; /* Ensure a minimum size on very small devices */
             }
             .cover-text {
-                font-size: 1.8rem; /* Further reduced font size for mobile */
-                letter-spacing: 0.05em; /* Further reduced letter spacing on mobile */
+                font-size: 10vw; /* Scales with viewport width for better fit on mobile */
+                letter-spacing: 0.03em; /* Minimal letter spacing on mobile to prevent overflow */
             }
             .menu-title-main {
-                font-size: 1.8rem; /* Adjust title for smaller screens */
+                font-size: 6vw; /* Scales with viewport width */
             }
             .menu-item-title {
-                font-size: 1rem; /* Adjust font size for smaller screens */
+                font-size: 4vw; /* Scales with viewport width */
             }
             .menu-item-description {
-                font-size: 0.75rem; /* Adjust font size for smaller screens */
+                font-size: 3vw; /* Scales with viewport width */
                 line-height: 1.4;
             }
             .page-content {
-                padding: 0.8rem; /* Reduced padding for page content on smaller screens */
+                padding: 3vw; /* Padding scales with viewport */
             }
             .button-style {
-                padding: 0.4rem 1.2rem; /* Smaller buttons on mobile */
-                font-size: 0.75rem;
+                padding: 1.5vw 4vw; /* Buttons scale with viewport */
+                font-size: 2vw;
             }
             .menu-item-container {
-                 margin-bottom: 0.6rem; /* Less space between items on mobile */
+                 margin-bottom: 2vw; /* Margins scale with viewport */
             }
             .divider {
-                width: 60px;
-                margin: 0.5rem auto; /* Smaller margin for dividers on mobile */
+                width: 8vw;
+                margin: 1vw auto; /* Margins scale with viewport */
             }
         }
 
@@ -106,7 +107,7 @@
             flex-direction: column;
             justify-content: center; /* Center content vertically */
             align-items: center;
-            padding: 3rem; /* Consistent padding for both sides */
+            padding: 3rem; /* Consistent padding for both sides (will be overridden by media query) */
             box-sizing: border-box;
             border-radius: 1.5rem;
             background-color: white; /* Each page has its own white background */
@@ -122,17 +123,18 @@
             transform: rotateY(180deg); /* Initial state for back page */
         }
 
+        /* Default (desktop) font sizes */
         .cover-text {
             font-family: 'Playfair Display', serif;
-            font-size: 8rem; /* Large size for desktop */
+            font-size: 8rem; /* Fixed size for desktop */
             font-weight: 700;
-            color: #2a2a2a; /* Darker, richer black */
-            letter-spacing: 0.18em; /* More spacing */
+            color: #2a2a2a;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
             text-align: center;
             padding: 1rem;
             line-height: 1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05); /* Subtle text shadow */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .cover-gradient-overlay {
@@ -145,33 +147,33 @@
 
         .menu-title-main {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem; /* Large for desktop */
+            font-size: 3rem; /* Fixed size for desktop */
             font-weight: 700;
             color: #3a3a3a;
-            margin-bottom: 2rem; /* More space */
+            margin-bottom: 2rem;
             text-align: center;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.03);
         }
 
         .menu-item-container {
             width: 100%;
-            max-width: 450px;
-            margin-bottom: 1.5rem; /* More space between items */
-            flex-shrink: 0; /* Prevent shrinking if content is too large */
+            max-width: 450px; /* Max width for content container */
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
         }
 
         .menu-item-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; /* Medium for desktop */
+            font-size: 1.5rem; /* Fixed size for desktop */
             font-weight: 700;
             color: #444;
-            margin-bottom: 0.3rem; /* Less space to description */
+            margin-bottom: 0.3rem;
             text-align: center;
         }
 
         .menu-item-description {
             font-family: 'Inter', sans-serif;
-            font-size: 1rem; /* Base size for desktop */
+            font-size: 1rem; /* Fixed size for desktop */
             color: #555;
             line-height: 1.6;
             text-align: center;
