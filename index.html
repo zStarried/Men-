@@ -116,16 +116,8 @@
         }
 
         .front-page {
-            /* No initial transform needed, default 0deg */
-        }
-
-        .back-page {
-            transform: rotateY(180deg); /* Initial state for back page */
-        }
-
-        /* Default (desktop) font sizes */
-        .cover-text {
-            font-family: 'Playfair Display', serif;
+            /* Desktop font size for cover-text before media query overrides */
+            font-family: 'Playfair Display', serif; /* Ensure font is applied here too */
             font-size: 4.8rem; /* Fixed size for desktop (reduced by 40%) */
             font-weight: 700;
             color: #2a2a2a;
@@ -135,12 +127,58 @@
             padding: 1rem;
             line-height: 1;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            
+            /* Specific styling for elegant border around Menù text */
+            position: relative; /* Needed for pseudo-elements */
         }
+        
+        .front-page .cover-text-wrapper {
+            position: relative;
+            padding: 1.5rem 2rem; /* Padding for the wrapper around the text */
+            margin-bottom: 2rem; /* Space between text and button */
+            border: 2px solid #ddd; /* Light border */
+            border-radius: 0.75rem; /* Rounded corners for the border */
+            overflow: visible; /* Allow pseudo-elements to draw outside */
+        }
+
+        .front-page .cover-text-wrapper::before,
+        .front-page .cover-text-wrapper::after {
+            content: '';
+            position: absolute;
+            width: 30px; /* Length of the decorative line */
+            height: 2px;
+            background-color: #aaa; /* Color of the line */
+        }
+
+        .front-page .cover-text-wrapper::before {
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%); /* Move to corner */
+        }
+        .front-page .cover-text-wrapper::after {
+            bottom: 0;
+            right: 0;
+            transform: translate(50%, 50%); /* Move to corner */
+        }
+        
+        /* Adjustments for smaller screens on cover-text-wrapper */
+        @media (max-width: 800px) {
+            .front-page .cover-text-wrapper {
+                padding: 1rem 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .front-page .cover-text-wrapper::before,
+            .front-page .cover-text-wrapper::after {
+                width: 20px;
+            }
+        }
+
 
         .cover-gradient-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(240,240,240,0.8) 100%);
+            /* Enhanced radial gradient */
+            background: radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 50%, rgba(220,220,220,0.7) 100%);
             border-radius: 1.5rem;
             z-index: -1;
         }
@@ -215,7 +253,9 @@
             <!-- Front Page (Cover) -->
             <div id="frontPage" class="page-content front-page">
                 <div class="cover-gradient-overlay"></div>
-                <h1 class="cover-text">Menù</h1>
+                <div class="cover-text-wrapper">
+                    <h1 class="cover-text">Menù</h1>
+                </div>
                 <button id="flipToMenuBtn" class="button-style mt-10">
                     Scopri il Menù
                 </button>
