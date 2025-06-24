@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menù Elegante</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap');
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -12,7 +14,7 @@
     }
 
     body {
-      font-family: 'Georgia', serif;
+      font-family: 'Playfair Display', serif;
       background: #f5f5f5;
       color: #333;
       display: flex;
@@ -40,8 +42,8 @@
     h1 {
       font-size: 2.5rem;
       margin-bottom: 2rem;
-      color: #2f2f2f;
-      font-weight: 400;
+      color: #1a237e;
+      font-weight: 700;
     }
 
     button {
@@ -53,7 +55,7 @@
       font-size: 1.2rem;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
-      font-family: 'Georgia', serif;
+      font-family: 'Playfair Display', serif;
     }
 
     button:hover {
@@ -62,9 +64,42 @@
     }
 
     .menu {
-      text-align: left;
+      text-align: center;
       font-size: 1.1rem;
-      line-height: 1.8;
+      line-height: 2;
+      position: relative;
+    }
+
+    .menu-entry {
+      margin-bottom: 1.5rem;
+    }
+
+    .menu-entry strong {
+      display: block;
+      font-size: 1.3rem;
+      color: #1a237e;
+      margin-bottom: 0.5rem;
+    }
+
+    .line {
+      width: 60%;
+      height: 2px;
+      background-color: #1a237e;
+      margin: 1rem auto;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: #1a237e;
+      border-radius: 50%;
     }
 
     .hidden {
@@ -114,17 +149,34 @@
   <div class="container hidden" id="menuPage">
     <h1>Menù</h1>
     <div class="menu">
-      <strong>Antipasto:</strong><br>
-      Coni di sfoglia ripieni di mousse di mortadella, ricotta e pistacchio.<br><br>
+      <div class="menu-entry">
+        <strong>Antipasto</strong>
+        Coni di sfoglia ripieni di mousse di mortadella, ricotta e pistacchio.
+        <div class="line"></div>
+      </div>
 
-      <strong>Prima portata:</strong><br>
-      Gnocchi gluten free al pomodoro con ricotta, basilico e olio EVO.<br><br>
+      <div class="menu-entry">
+        <strong>Prima portata</strong>
+        Gnocchi gluten free al pomodoro con ricotta, basilico e olio EVO.
+        <div class="line"></div>
+      </div>
 
-      <strong>Seconda portata:</strong><br>
-      Filetto di manzo al coltello con uovo pastorizzato, olio EVO e crumble di cipolla fritta.<br><br>
+      <div class="menu-entry">
+        <strong>Seconda portata</strong>
+        Filetto di manzo al coltello con uovo pastorizzato, olio EVO e crumble di cipolla fritta.
+        <div class="line"></div>
+      </div>
 
-      <strong>Pre-Dessert:</strong><br>
-      Sorbetto al mango e yogurt bianco con coulis di lampone e lime.
+      <div class="menu-entry">
+        <strong>Pre-Dessert</strong>
+        Sorbetto al mango e yogurt bianco con coulis di lampone e lime.
+      </div>
+
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </div>
   </div>
 
