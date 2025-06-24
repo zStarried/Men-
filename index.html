@@ -15,67 +15,83 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 1rem; /* Overall padding for body, adapts */
+            min-height: 100vh; /* Ensures body takes full viewport height */
+            padding: 1rem; /* Overall padding for body */
             box-sizing: border-box;
             overflow-x: hidden; /* Prevent horizontal scrolling */
+            /* Allows body to grow if menu content exceeds viewport on small screens */
+            align-items: flex-start; /* Align content to start when scrolling needed */
+            padding-top: 20px; /* Add some top padding */
+            padding-bottom: 20px; /* Add some bottom padding */
         }
 
         .menu-wrapper {
-            /* This div helps to constrain the overall size on large screens */
+            /* This wrapper simulates the "half A4 paper" and handles the shadow/border */
             max-width: 800px; /* Max width similar to A4 portrait */
             width: 100%; /* Take full width on smaller screens */
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Shadow for the whole card */
             border-radius: 1.5rem; /* Rounded corners for the wrapper */
             position: relative;
             perspective: 1000px; /* Crucial for 3D effect */
-            height: 562px; /* Fixed height for desktop to match A4 half-page */
+            /* Height will be determined by its children, but we give a min-height for empty states */
+            min-height: 500px; /* A reasonable minimum height for desktop */
+            height: 100%; /* Occupy full height of available space in body's flex container */
             background-color: transparent; /* Wrapper itself is transparent */
             overflow: hidden; /* Important for clean borders */
+            display: flex; /* Make it a flex container for its content */
+            flex-direction: column; /* Stack children vertically */
+            flex-grow: 1; /* Allow it to grow in flex parent */
         }
 
         /* Responsive adjustments for smaller screens */
         @media (max-width: 800px) {
+            body {
+                padding: 10px; /* Less padding on very small screens */
+                align-items: center; /* Center horizontally if content doesn't fill height */
+            }
             .menu-wrapper {
                 border-radius: 1rem;
-                height: 80vh; /* Use vh for mobile height, ensures it fits screen */
-                min-height: auto; /* Remove min-height to allow flexibility */
-                max-height: none; /* No max height */
+                min-height: 65vh; /* Larger min-height on small devices to fill screen */
+                /* max-height: 90vh; /* Optionally set a max height for very long content on mobile */
+                height: 100%; /* Ensure it tries to take available height */
             }
             .cover-text {
-                font-size: 4rem; /* Adjust font size for smaller screens */
+                font-size: 3.5rem; /* Adjust font size for smaller screens */
             }
             .menu-title-main {
-                font-size: 2rem; /* Adjust title for smaller screens */
+                font-size: 1.8rem; /* Adjust title for smaller screens */
             }
             .menu-item-title {
-                font-size: 1.1rem; /* Adjust font size for smaller screens */
+                font-size: 1rem; /* Adjust font size for smaller screens */
             }
             .menu-item-description {
-                font-size: 0.8rem; /* Adjust font size for smaller screens */
+                font-size: 0.75rem; /* Adjust font size for smaller screens */
+                line-height: 1.4;
             }
             .page-content {
-                padding: 1rem; /* Reduced padding for page content on smaller screens */
+                padding: 0.8rem; /* Reduced padding for page content on smaller screens */
             }
             .button-style {
-                padding: 0.5rem 1.5rem; /* Smaller buttons on mobile */
-                font-size: 0.8rem;
+                padding: 0.4rem 1.2rem; /* Smaller buttons on mobile */
+                font-size: 0.75rem;
             }
             .menu-item-container {
-                 margin-bottom: 0.8rem; /* Less space between items on mobile */
+                 margin-bottom: 0.6rem; /* Less space between items on mobile */
             }
             .divider {
-                margin: 0.6rem auto; /* Smaller margin for dividers on mobile */
+                width: 60px;
+                margin: 0.5rem auto; /* Smaller margin for dividers on mobile */
             }
         }
 
         /* The actual flipper element */
         .menu-card-flipper {
             width: 100%;
-            height: 100%;
+            height: 100%; /* Important: Flipper takes 100% height of its parent (menu-wrapper) */
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.8s ease-in-out;
+            flex-grow: 1; /* Allow flipper to grow and fill wrapper */
         }
 
         .menu-card-flipper.flipped {
@@ -98,6 +114,7 @@
             background-color: white; /* Each page has its own white background */
             overflow-y: auto; /* Allow scrolling if content overflows vertically */
             -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            /* flex-grow: 1; /* Not needed here as it's absolute, but context is good */
         }
 
         .front-page {
@@ -110,7 +127,7 @@
 
         .cover-text {
             font-family: 'Playfair Display', serif;
-            font-size: 8rem; /* Slightly larger */
+            font-size: 8rem; /* Large size for desktop */
             font-weight: 700;
             color: #2a2a2a; /* Darker, richer black */
             letter-spacing: 0.18em; /* More spacing */
@@ -131,7 +148,7 @@
 
         .menu-title-main {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem; /* Larger for "La Nostra Proposta" */
+            font-size: 3rem; /* Large for desktop */
             font-weight: 700;
             color: #3a3a3a;
             margin-bottom: 2rem; /* More space */
@@ -148,7 +165,7 @@
 
         .menu-item-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; /* Slightly larger */
+            font-size: 1.5rem; /* Medium for desktop */
             font-weight: 700;
             color: #444;
             margin-bottom: 0.3rem; /* Less space to description */
@@ -157,7 +174,7 @@
 
         .menu-item-description {
             font-family: 'Inter', sans-serif;
-            font-size: 1rem; /* Slightly larger */
+            font-size: 1rem; /* Base size for desktop */
             color: #555;
             line-height: 1.6;
             text-align: center;
