@@ -19,6 +19,7 @@
       font-family: 'Playfair Display', serif;
       background: #f5f5f5;
       color: #333;
+      overflow-x: hidden;
     }
 
     body {
@@ -27,7 +28,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2rem;
+      padding: 2rem 1rem;
     }
 
     .container {
@@ -40,6 +41,9 @@
       margin: 2rem auto;
       position: relative;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
@@ -71,6 +75,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
     }
 
     .menu-entry {
@@ -176,6 +181,12 @@
     .triangle2 {
       bottom: 50px;
       left: 20%;
+    }
+
+    #menuPage {
+      height: auto;
+      min-height: 100vh;
+      overflow-y: auto;
     }
   </style>
 </head>
