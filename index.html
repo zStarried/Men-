@@ -13,6 +13,11 @@
       padding: 0;
     }
 
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
     body {
       font-family: 'Playfair Display', serif;
       background: #f5f5f5;
@@ -21,10 +26,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
       padding: 1rem;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
+      text-align: center;
     }
 
     .container {
@@ -34,7 +39,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       padding: 2rem;
-      text-align: center;
+      margin: 2rem auto;
       position: relative;
       z-index: 2;
     }
@@ -64,14 +69,17 @@
     }
 
     .menu {
-      text-align: center;
       font-size: 1.1rem;
       line-height: 2;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .menu-entry {
       margin-bottom: 1.5rem;
+      max-width: 90%;
     }
 
     .menu-entry strong {
@@ -134,18 +142,64 @@
       top: 30%;
       right: -30px;
     }
+
+    .decor-line {
+      width: 100px;
+      height: 2px;
+      background-color: #1a237e;
+      position: absolute;
+      transform: rotate(45deg);
+      opacity: 0.15;
+    }
+
+    .line1 {
+      top: 20px;
+      left: 30%;
+    }
+
+    .line2 {
+      bottom: 20px;
+      right: 30%;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid #1a237e;
+      opacity: 0.1;
+      position: absolute;
+    }
+
+    .triangle1 {
+      top: 50px;
+      right: 20%;
+    }
+
+    .triangle2 {
+      bottom: 50px;
+      left: 20%;
+    }
   </style>
 </head>
 <body>
+  <!-- Elementi di design aggiuntivi -->
   <div class="decor decor1"></div>
   <div class="decor decor2"></div>
   <div class="decor decor3"></div>
+  <div class="decor-line line1"></div>
+  <div class="decor-line line2"></div>
+  <div class="triangle triangle1"></div>
+  <div class="triangle triangle2"></div>
 
+  <!-- Pagina Iniziale -->
   <div class="container" id="home">
     <h1>Menù</h1>
     <button onclick="showMenu()">Visualizza Menù</button>
   </div>
 
+  <!-- Pagina Menù -->
   <div class="container hidden" id="menuPage">
     <h1>Menù</h1>
     <div class="menu">
@@ -157,34 +211,4 @@
 
       <div class="menu-entry">
         <strong>Prima portata</strong>
-        Gnocchi gluten free al pomodoro con ricotta, basilico e olio EVO.
-        <div class="line"></div>
-      </div>
-
-      <div class="menu-entry">
-        <strong>Seconda portata</strong>
-        Filetto di manzo al coltello con uovo pastorizzato, olio EVO e crumble di cipolla fritta.
-        <div class="line"></div>
-      </div>
-
-      <div class="menu-entry">
-        <strong>Pre-Dessert</strong>
-        Sorbetto al mango e yogurt bianco con coulis di lampone e lime.
-      </div>
-
-      <div class="dots">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function showMenu() {
-      document.getElementById('home').classList.add('hidden');
-      document.getElementById('menuPage').classList.remove('hidden');
-    }
-  </script>
-</body>
-</html>
+        Gnocchi gluten free al pomodoro con ricotta, basilico e olio EVO
