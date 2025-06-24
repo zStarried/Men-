@@ -54,8 +54,8 @@
                 min-height: 400px; /* Ensure a minimum size on very small devices */
             }
             .cover-text {
-                font-size: 6vw; /* Scales with viewport width for better fit on mobile (reduced by 40%) */
-                letter-spacing: 0.03em; /* Minimal letter spacing on mobile to prevent overflow */
+                font-size: 8vw; /* Scales with viewport width, adjusted for safe fit */
+                letter-spacing: 0.02em; /* Reduced letter spacing on mobile for better fit */
             }
             .menu-title-main {
                 font-size: 6vw; /* Scales with viewport width */
@@ -105,7 +105,7 @@
             backface-visibility: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Align content to the top */
+            justify-content: center; /* ALIGN TO CENTER VERTICALLY */
             align-items: center;
             padding: 3rem; /* Consistent padding for both sides (will be overridden by media query) */
             box-sizing: border-box;
@@ -118,7 +118,7 @@
         .front-page {
             /* Desktop font size for cover-text before media query overrides */
             font-family: 'Playfair Display', serif; /* Ensure font is applied here too */
-            font-size: 4.8rem; /* Fixed size for desktop (reduced by 40%) */
+            font-size: 8rem; /* Fixed size for desktop */
             font-weight: 700;
             color: #2a2a2a;
             letter-spacing: 0.18em;
