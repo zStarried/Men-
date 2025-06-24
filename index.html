@@ -19,7 +19,6 @@
             padding: 1rem; /* Overall padding for body */
             box-sizing: border-box;
             overflow-x: hidden; /* Prevent horizontal scrolling */
-            /* Allows body to grow if menu content exceeds viewport on small screens */
             align-items: flex-start; /* Align content to start when scrolling needed */
             padding-top: 20px; /* Add some top padding */
             padding-bottom: 20px; /* Add some bottom padding */
@@ -33,7 +32,6 @@
             border-radius: 1.5rem; /* Rounded corners for the wrapper */
             position: relative;
             perspective: 1000px; /* Crucial for 3D effect */
-            /* Height will be determined by its children, but we give a min-height for empty states */
             min-height: 500px; /* A reasonable minimum height for desktop */
             height: 100%; /* Occupy full height of available space in body's flex container */
             background-color: transparent; /* Wrapper itself is transparent */
@@ -52,12 +50,11 @@
             .menu-wrapper {
                 border-radius: 1rem;
                 min-height: 65vh; /* Larger min-height on small devices to fill screen */
-                /* max-height: 90vh; /* Optionally set a max height for very long content on mobile */
                 height: 100%; /* Ensure it tries to take available height */
             }
             .cover-text {
-                font-size: 3rem; /* Further adjust font size for smaller screens to prevent cutting */
-                letter-spacing: 0.15em; /* Slightly less letter spacing on small screens */
+                font-size: 2.5rem; /* Further reduced font size for mobile */
+                letter-spacing: 0.1em; /* Reduced letter spacing on mobile */
             }
             .menu-title-main {
                 font-size: 1.8rem; /* Adjust title for smaller screens */
@@ -115,7 +112,6 @@
             background-color: white; /* Each page has its own white background */
             overflow-y: auto; /* Allow scrolling if content overflows vertically */
             -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-            /* flex-grow: 1; /* Not needed here as it's absolute, but context is good */
         }
 
         .front-page {
