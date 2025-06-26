@@ -22,9 +22,6 @@
     }
 
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       overflow: hidden;
     }
 
@@ -41,14 +38,6 @@
       transition: transform 1s;
     }
 
-    #flipContainer {
-      perspective: 1000px;
-      width: 100%;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-    }
-
     .container {
       width: 100%;
       max-width: 600px;
@@ -59,14 +48,22 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       position: relative;
       z-index: 2;
-      margin-bottom: 4rem;
+      margin: 2rem auto;
     }
 
-    h1, h2 {
+    h1 {
       font-size: 2.5rem;
       margin-bottom: 2rem;
       color: #555;
       font-weight: 700;
+    }
+
+    .menu-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #555;
+      letter-spacing: 3px;
     }
 
     button {
@@ -87,20 +84,15 @@
 
     .menu {
       font-size: 1.1rem;
+      line-height: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 100%;
     }
 
     .menu-entry {
-      padding: 1.5rem 0;
-      border-bottom: 2px solid #555;
+      margin: 1rem 0;
       width: 100%;
-    }
-
-    .menu-entry:last-child {
-      border-bottom: none;
     }
 
     .menu-entry strong {
@@ -110,11 +102,18 @@
       margin-bottom: 0.5rem;
     }
 
+    .line {
+      width: 60%;
+      height: 2px;
+      background-color: #555;
+      margin: 1.5rem auto;
+    }
+
     .dots {
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
 
     .dot {
@@ -201,10 +200,12 @@
       transform: rotateY(180deg);
       z-index: 1;
       overflow-y: auto;
+      height: 100vh;
+      width: 100%;
+      padding-top: 3rem;
       display: flex;
       justify-content: center;
       align-items: start;
-      padding-top: 3rem;
     }
 
     .flipped #homePage {
@@ -213,6 +214,14 @@
 
     .flipped #menuPage {
       transform: rotateY(0deg);
+    }
+
+    #flipContainer {
+      perspective: 1000px;
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -237,41 +246,55 @@
     <!-- Pagina Menù -->
     <div class="page" id="menuPage">
       <div class="container">
-        <h2>MENÙ</h2>
+        <h2 class="menu-title">MENÙ</h2>
         <div class="menu">
+
           <div class="menu-entry">
             <strong>Negroni Rivisitato</strong>
-            Gelè di Cocktail Negroni
+            Gelè di Cocktail Negroni 
+            <div class="line"></div>
           </div>
+
           <div class="menu-entry">
             <strong>Cialde d’Emilia</strong>
             Coni croccanti con mousse di mortadella e ricotta, granella di pistacchio e olio al basilico.
+            <div class="line"></div>
           </div>
+
           <div class="menu-entry">
             <strong>Gazpacho con Perle di Basilico</strong>
             Vellutata fredda di pomodoro con caviale vegetale al basilico.
+            <div class="line"></div>
           </div>
+
           <div class="menu-entry">
             <strong>Gnocchi dell’Orto al Profumo di Basilico</strong>
             Gnocchi senza glutine con salsa di pomodoro, olio extravergine e basilico fresco.
+            <div class="line"></div>
           </div>
+
           <div class="menu-entry">
             <strong>Battuta Gourmet Accompagnata</strong>
             Filetto di manzo tagliato al coltello, senape delicata, uovo pastorizzato, limone, chips di cipolla e carota al burro.
+            <div class="line"></div>
           </div>
+
           <div class="menu-entry">
             <strong>Sospiri al Limone</strong>
             Crema leggera di limone e panna montata.
+            <div class="line"></div>
           </div>
+
           <div class="menu-entry">
             <strong>"Arrivederci"</strong>
             Cheesecake al limone con crumble al burro.
           </div>
-        </div>
-        <div class="dots">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+
+          <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -281,6 +304,9 @@
     function flipCard() {
       document.getElementById('flipContainer').classList.add('flipped');
       document.body.style.overflow = 'auto';
+      setTimeout(() => {
+        document.getElementById('menuPage').scrollIntoView({ behavior: "smooth" });
+      }, 400);
     }
   </script>
 </body>
