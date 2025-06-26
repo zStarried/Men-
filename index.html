@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menù Elegante</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Serif+Text&display=swap');
 
     * {
       margin: 0;
@@ -13,48 +13,94 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Playfair Display', serif;
-      background-color: #f5f5f5;
-      color: #555;
-      line-height: 1.6;
-      padding: 2rem 1rem;
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      font-family: 'DM Serif Text', serif;
+      background-color: #f9f9f9;
+      color: #444;
+      transition: opacity 0.5s ease;
     }
 
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #fff;
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .visible {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.5s ease;
+    }
+
+    .centered {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
+      font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       margin-bottom: 2rem;
       color: #333;
       letter-spacing: 2px;
     }
 
+    button {
+      background-color: #333;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      font-family: 'Playfair Display', serif;
+    }
+
+    button:hover {
+      background-color: #111;
+      transform: scale(1.05);
+    }
+
+    .container {
+      max-width: 650px;
+      margin: auto;
+      background: #fff;
+      padding: 2.5rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
     .menu-entry {
       text-align: center;
-      margin: 2rem 0;
+      margin: 3rem 0;
     }
 
     .menu-entry strong {
       display: block;
-      font-size: 1.4rem;
-      color: #333;
-      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+      color: #222;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .menu-entry p {
+      font-size: 1rem;
+      font-family: 'DM Serif Text', serif;
     }
 
     .line {
       width: 60%;
       height: 2px;
-      background-color: #555;
-      margin: 1rem auto;
+      background-color: #ccc;
+      margin: 2.5rem auto;
     }
 
     .dots {
@@ -67,75 +113,98 @@
     .dot {
       width: 10px;
       height: 10px;
-      background-color: #555;
+      background-color: #aaa;
       border-radius: 50%;
     }
 
     @media (max-width: 600px) {
-      .container {
-        padding: 1.5rem 1rem;
-      }
-
       h1 {
         font-size: 2rem;
       }
 
       .menu-entry strong {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+      }
+
+      .menu-entry p {
+        font-size: 0.95rem;
+      }
+
+      .line {
+        width: 70%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>MENÙ</h1>
+  <!-- Pagina iniziale -->
+  <div id="homePage" class="centered visible">
+    <h1>Benvenuto al Menù</h1>
+    <button onclick="showMenu()">Visualizza Menù</button>
+  </div>
 
-    <div class="menu-entry">
-      <strong>Negroni Rivisitato</strong>
-      Gelè di Cocktail Negroni
-      <div class="line"></div>
-    </div>
+  <!-- Pagina menù -->
+  <div id="menuPage" class="hidden">
+    <div class="container">
+      <h1>MENÙ</h1>
 
-    <div class="menu-entry">
-      <strong>Cialde d’Emilia</strong>
-      Coni croccanti con mousse di mortadella e ricotta, granella di pistacchio e olio al basilico.
-      <div class="line"></div>
-    </div>
+      <div class="menu-entry">
+        <strong>Negroni Rivisitato</strong>
+        <p>Gelè di Cocktail Negroni</p>
+        <div class="line"></div>
+      </div>
 
-    <div class="menu-entry">
-      <strong>Gazpacho con Perle di Basilico</strong>
-      Vellutata fredda di pomodoro con caviale vegetale al basilico.
-      <div class="line"></div>
-    </div>
+      <div class="menu-entry">
+        <strong>Cialde d’Emilia</strong>
+        <p>Coni croccanti con mousse di mortadella e ricotta, granella di pistacchio e olio al basilico.</p>
+        <div class="line"></div>
+      </div>
 
-    <div class="menu-entry">
-      <strong>Gnocchi dell’Orto al Profumo di Basilico</strong>
-      Gnocchi senza glutine con salsa di pomodoro, olio extravergine e basilico fresco.
-      <div class="line"></div>
-    </div>
+      <div class="menu-entry">
+        <strong>Gazpacho con Perle di Basilico</strong>
+        <p>Vellutata fredda di pomodoro con caviale vegetale al basilico.</p>
+        <div class="line"></div>
+      </div>
 
-    <div class="menu-entry">
-      <strong>Battuta Gourmet Accompagnata</strong>
-      Filetto di manzo tagliato al coltello, senape delicata, uovo pastorizzato, limone, chips di cipolla e carota al burro.
-      <div class="line"></div>
-    </div>
+      <div class="menu-entry">
+        <strong>Gnocchi dell’Orto al Profumo di Basilico</strong>
+        <p>Gnocchi senza glutine con salsa di pomodoro, olio extravergine e basilico fresco.</p>
+        <div class="line"></div>
+      </div>
 
-    <div class="menu-entry">
-      <strong>Sospiri al Limone</strong>
-      Crema leggera di limone e panna montata.
-      <div class="line"></div>
-    </div>
+      <div class="menu-entry">
+        <strong>Battuta Gourmet Accompagnata</strong>
+        <p>Filetto di manzo tagliato al coltello, senape delicata, uovo pastorizzato, limone, chips di cipolla e carota al burro.</p>
+        <div class="line"></div>
+      </div>
 
-    <div class="menu-entry">
-      <strong>"Arrivederci"</strong>
-      Cheesecake al limone con crumble al burro.
-    </div>
+      <div class="menu-entry">
+        <strong>Sospiri al Limone</strong>
+        <p>Crema leggera di limone e panna montata.</p>
+        <div class="line"></div>
+      </div>
 
-    <div class="dots">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
+      <div class="menu-entry">
+        <strong>"Arrivederci"</strong>
+        <p>Cheesecake al limone con crumble al burro.</p>
+      </div>
+
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </div>
   </div>
+
+  <script>
+    function showMenu() {
+      document.getElementById('homePage').classList.remove('visible');
+      document.getElementById('homePage').classList.add('hidden');
+      document.getElementById('menuPage').classList.remove('hidden');
+      document.getElementById('menuPage').classList.add('visible');
+    }
+  </script>
 </body>
 </html>
+
