@@ -22,7 +22,23 @@
     }
 
     body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
+    }
+
+    .page {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      transition: transform 1s;
     }
 
     #flipContainer {
@@ -30,40 +46,7 @@
       width: 100%;
       height: 100vh;
       position: relative;
-    }
-
-    .page {
-      width: 100%;
-      height: 100vh;
-      position: absolute;
-      top: 0;
-      left: 0;
-      backface-visibility: hidden;
-      transition: transform 1s;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #homePage {
-      transform: rotateY(0deg);
-      z-index: 2;
-    }
-
-    #menuPage {
-      transform: rotateY(180deg);
-      z-index: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .flipped #homePage {
-      transform: rotateY(-180deg);
-    }
-
-    .flipped #menuPage {
-      transform: rotateY(0deg);
-      z-index: 3;
+      overflow: hidden;
     }
 
     .container {
@@ -76,15 +59,14 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       position: relative;
       z-index: 2;
-      margin: 2rem auto;
+      margin-bottom: 4rem;
     }
 
-    h1, .menu-title {
+    h1, h2 {
       font-size: 2.5rem;
-      font-weight: 700;
       margin-bottom: 2rem;
       color: #555;
-      letter-spacing: 2px;
+      font-weight: 700;
     }
 
     button {
@@ -105,14 +87,20 @@
 
     .menu {
       font-size: 1.1rem;
-      line-height: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
     }
 
     .menu-entry {
-      margin-bottom: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 2px solid #555;
+      width: 100%;
+    }
+
+    .menu-entry:last-child {
+      border-bottom: none;
     }
 
     .menu-entry strong {
@@ -122,18 +110,11 @@
       margin-bottom: 0.5rem;
     }
 
-    .line {
-      width: 60%;
-      height: 2px;
-      background-color: #555;
-      margin: 1rem auto;
-    }
-
     .dots {
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-top: 1rem;
+      margin-top: 2rem;
     }
 
     .dot {
@@ -143,31 +124,53 @@
       border-radius: 50%;
     }
 
-    /* Decorazioni */
-    .decor, .decor-line, .triangle {
+    .decor {
       position: absolute;
-      opacity: 0.1;
+      border-radius: 50%;
       background-color: #555;
+      opacity: 0.1;
       z-index: 1;
     }
 
-    .decor {
-      border-radius: 50%;
+    .decor1 {
+      width: 200px;
+      height: 200px;
+      top: -50px;
+      left: -50px;
     }
 
-    .decor1 { width: 200px; height: 200px; top: -50px; left: -50px; }
-    .decor2 { width: 150px; height: 150px; bottom: -40px; right: -40px; }
-    .decor3 { width: 100px; height: 100px; top: 30%; right: -30px; }
+    .decor2 {
+      width: 150px;
+      height: 150px;
+      bottom: -40px;
+      right: -40px;
+    }
+
+    .decor3 {
+      width: 100px;
+      height: 100px;
+      top: 30%;
+      right: -30px;
+    }
 
     .decor-line {
       width: 100px;
       height: 2px;
+      background-color: #555;
+      position: absolute;
       transform: rotate(45deg);
       opacity: 0.15;
     }
 
-    .line1 { top: 20px; left: 30%; }
-    .line2 { bottom: 20px; right: 30%; }
+    .line1 {
+      top: 20px;
+      left: 30%;
+    }
+
+    .line2 {
+      bottom: 20px;
+      right: 30%;
+    }
 
     .triangle {
       width: 0;
@@ -175,10 +178,42 @@
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
       border-bottom: 30px solid #555;
+      opacity: 0.1;
+      position: absolute;
     }
 
-    .triangle1 { top: 50px; right: 20%; }
-    .triangle2 { bottom: 50px; left: 20%; }
+    .triangle1 {
+      top: 50px;
+      right: 20%;
+    }
+
+    .triangle2 {
+      bottom: 50px;
+      left: 20%;
+    }
+
+    #homePage {
+      transform: rotateY(0deg);
+      z-index: 2;
+    }
+
+    #menuPage {
+      transform: rotateY(180deg);
+      z-index: 1;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      padding-top: 3rem;
+    }
+
+    .flipped #homePage {
+      transform: rotateY(-180deg);
+    }
+
+    .flipped #menuPage {
+      transform: rotateY(0deg);
+    }
   </style>
 </head>
 <body>
@@ -202,25 +237,50 @@
     <!-- Pagina Menù -->
     <div class="page" id="menuPage">
       <div class="container">
-        <h2 class="menu-title">MENÙ</h2>
+        <h2>MENÙ</h2>
         <div class="menu">
-          <div class="menu-entry"><strong>Negroni Rivisitato</strong>Gelè di Cocktail Negroni<div class="line"></div></div>
-          <div class="menu-entry"><strong>Cialde d’Emilia</strong>Coni croccanti con mousse di mortadella e ricotta, granella di pistacchio e olio al basilico.<div class="line"></div></div>
-          <div class="menu-entry"><strong>Gazpacho con Perle di Basilico</strong>Vellutata fredda di pomodoro con caviale vegetale al basilico.<div class="line"></div></div>
-          <div class="menu-entry"><strong>Gnocchi dell’Orto al Profumo di Basilico</strong>Gnocchi senza glutine con salsa di pomodoro, olio extravergine e basilico fresco.<div class="line"></div></div>
-          <div class="menu-entry"><strong>Battuta Gourmet Accompagnata</strong>Filetto di manzo tagliato al coltello, senape delicata, uovo pastorizzato, limone, chips di cipolla e carota al burro.<div class="line"></div></div>
-          <div class="menu-entry"><strong>Sospiri al Limone</strong>Crema leggera di limone e panna montata.<div class="line"></div></div>
-          <div class="menu-entry"><strong>"Arrivederci"</strong>Cheesecake al limone con crumble al burro.</div>
-          <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="menu-entry">
+            <strong>Negroni Rivisitato</strong>
+            Gelè di Cocktail Negroni
+          </div>
+          <div class="menu-entry">
+            <strong>Cialde d’Emilia</strong>
+            Coni croccanti con mousse di mortadella e ricotta, granella di pistacchio e olio al basilico.
+          </div>
+          <div class="menu-entry">
+            <strong>Gazpacho con Perle di Basilico</strong>
+            Vellutata fredda di pomodoro con caviale vegetale al basilico.
+          </div>
+          <div class="menu-entry">
+            <strong>Gnocchi dell’Orto al Profumo di Basilico</strong>
+            Gnocchi senza glutine con salsa di pomodoro, olio extravergine e basilico fresco.
+          </div>
+          <div class="menu-entry">
+            <strong>Battuta Gourmet Accompagnata</strong>
+            Filetto di manzo tagliato al coltello, senape delicata, uovo pastorizzato, limone, chips di cipolla e carota al burro.
+          </div>
+          <div class="menu-entry">
+            <strong>Sospiri al Limone</strong>
+            Crema leggera di limone e panna montata.
+          </div>
+          <div class="menu-entry">
+            <strong>"Arrivederci"</strong>
+            Cheesecake al limone con crumble al burro.
+          </div>
+        </div>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
         </div>
       </div>
     </div>
-
   </div>
 
   <script>
     function flipCard() {
       document.getElementById('flipContainer').classList.add('flipped');
+      document.body.style.overflow = 'auto';
     }
   </script>
 </body>
